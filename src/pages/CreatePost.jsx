@@ -7,10 +7,12 @@ function CreatePost() {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const[errorMessage,setErrorMessage]=useState("")
+  const[loading,setLoading]=useState(false)
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
@@ -29,9 +31,20 @@ function CreatePost() {
       setErrorMessage(error?.response?.data?.message||"something went wrong")
      
     }
+    finally{
+      setLoading(false)
+    }
   };
 
   return (
+    <>
+    {loading && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div className="text-white text-lg">Loading...</div>
+      </div>
+    )}
+
+
     <form
       onSubmit={handleSubmit}
       className="bg-white rounded-lg shadow-md p-6 max-w-lg mx-auto"
@@ -74,6 +87,7 @@ function CreatePost() {
         Submit
       </button>
     </form>
+    </>
   );
 }
 

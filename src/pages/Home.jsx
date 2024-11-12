@@ -11,7 +11,7 @@ function Home() {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
 
-  // Fetch posts from the backend
+   
   const fetchPosts = async () => {
     try {
       const response = await axios.get("https://post-app-backend-7hpn.onrender.com/api/v1/postapp/getPosts");
@@ -24,8 +24,7 @@ function Home() {
   useEffect(() => {
     fetchPosts();
   }, []);
-
-  // Handle opening the edit modal
+ 
   const handleEdit = (postId) => {
     const post = posts.find((post) => post._id === postId);
     setSelectedPost(post);
