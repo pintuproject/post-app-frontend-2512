@@ -31,11 +31,11 @@ function Home() {
     setEditModalOpen(true);
   };
 
-  // Handle updating the post
+   
   const handleUpdate = async (e) => {
     e.preventDefault();
     if (selectedPost) {
-      setIsLoading(true); // Start loading
+      setIsLoading(true);  
       try {
         const formData = new FormData();
         formData.append("title", title);
@@ -48,12 +48,12 @@ function Home() {
             "Content-Type": "multipart/form-data",
           },
         });
-        await fetchPosts(); // Refresh the posts
+        await fetchPosts();  
         setEditModalOpen(false);
       } catch (error) {
         console.error("Error updating post", error);
       } finally {
-        setIsLoading(false); // End loading
+        setIsLoading(false); 
       }
     }
   };
@@ -66,16 +66,16 @@ function Home() {
 
   const confirmDelete = async () => {
     if (selectedPost) {
-      setIsLoading(true); // Start loading
+      setIsLoading(true);  
       const id = selectedPost._id;
       try {
         await axios.delete(`https://post-app-backend-7hpn.onrender.com/api/v1/postapp/deletePost/${id}`);
-        await fetchPosts(); // Refresh the posts
+        await fetchPosts();  
         setDeleteModalOpen(false);
       } catch (error) {
         console.error("Error deleting post", error);
       } finally {
-        setIsLoading(false); // End loading
+        setIsLoading(false);  
       }
     }
   };
@@ -87,7 +87,7 @@ function Home() {
           posts.map((post) => (
             <div key={post._id} className="bg-white rounded-lg shadow-md overflow-hidden">
               <img
-                src={`https://post-app-backend-7hpn.onrender.com/${post.imageUrl}`}
+                src={post.imageUrl}
                 alt={post.title}
                 className="w-full h-48 object-cover"
               />
